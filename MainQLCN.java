@@ -1,8 +1,5 @@
 package BTVN2;
 
-import managerbook.Book;
-import managerbook.ManageBookList;
-
 import java.util.Scanner;
 
 public class MainQLCN {
@@ -30,13 +27,13 @@ public class MainQLCN {
                     int choise2 = Integer.parseInt(scanner.nextLine());
                     switch (choise2) {
                         case 1:
-                            manageCanBo.addNhanVien();
+                            manageCanBo.addCanBo("NhanVien");
                             break;
                         case 2:
-                            manageCanBo.addCongNhan();
+                            manageCanBo.addCanBo("CongNhan");
                             break;
                         case 3:
-                            manageCanBo.addKySu();
+                            manageCanBo.addCanBo("KySu");
                             break;
                     }
                     break;
@@ -50,7 +47,24 @@ public class MainQLCN {
                     String nameXoa = scanner.nextLine();
                     manageCanBo.removeByName(nameXoa);
                     break;
-                case 4:
+                case 4: System.out.println("nhập vị trí cần edit");
+                    int indext = Integer.parseInt(scanner.nextLine());
+                    System.out.println("    1. Nhân viên ");
+                    System.out.println("    2. công nhân ");
+                    System.out.println("    3. kỹ sư ");
+                    int choiseEdit = Integer.parseInt(scanner.nextLine());
+                    switch (choiseEdit) {
+                        case 1:
+                            manageCanBo.edit(manageCanBo.create("NhanVien"),indext);
+                            break;
+                        case 2:
+                            manageCanBo.edit(manageCanBo.create("CongNhan"),indext);
+                            break;
+                        case 3:
+                            manageCanBo.edit(manageCanBo.create("KySu"),indext);
+                            break;
+                    }
+                    break;
                 case 5:
                     manageCanBo.show();
                     break;

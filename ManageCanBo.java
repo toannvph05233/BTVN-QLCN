@@ -1,13 +1,20 @@
 package BTVN2;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ManageCanBo {
-    ArrayList<CanBo> list = new ArrayList<>();
+    List<CanBo> list = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
-    public void addNhanVien() {
+    public void addCanBo(String nameCanBo) {
+        CanBo canBo = create(nameCanBo);
+        list.add(canBo);
+    }
+
+    public CanBo create(String nameCanBo) {
         System.out.println("Nhập tên:");
         String ten = scanner.nextLine();
         System.out.println("Nhập Ngày sinh:");
@@ -16,45 +23,21 @@ public class ManageCanBo {
         String gioiTinh = scanner.nextLine();
         System.out.println("Nhập địa chỉ:");
         String diaChi = scanner.nextLine();
-        NhanVien nhanVien = new NhanVien(ten, ngaySinh, gioiTinh, diaChi);
 
-        list.add(nhanVien);
+        if (nameCanBo == "CongNhan"){
+            System.out.println("Nhập Ngành:");
+            String nganh = scanner.nextLine();
+            System.out.println("Nhập bậc:");
+            String bac = scanner.nextLine();
+            return new CongNhan(nganh,bac,ten, ngaySinh, gioiTinh, diaChi);
+        }else if (nameCanBo == "KySu"){
+            System.out.println("Nhập Ngành:");
+            String nganh = scanner.nextLine();
+            return new KySu(ten, ngaySinh, gioiTinh, diaChi, nganh);
+        }else {
+            return new NhanVien(ten, ngaySinh, gioiTinh, diaChi);
+        }
     }
-
-    public void addCongNhan() {
-        System.out.println("Nhập tên:");
-        String ten = scanner.nextLine();
-        System.out.println("Nhập Ngày sinh:");
-        String ngaySinh = scanner.nextLine();
-        System.out.println("Nhập giới tính:");
-        String gioiTinh = scanner.nextLine();
-        System.out.println("Nhập địa chỉ:");
-        String diaChi = scanner.nextLine();
-        System.out.println("Nhập Ngành:");
-        String nganh = scanner.nextLine();
-        System.out.println("Nhập bậc:");
-        String bac = scanner.nextLine();
-
-        CongNhan congNhan = new CongNhan(nganh, bac, ten, ngaySinh, gioiTinh, diaChi);
-        list.add(congNhan);
-    }
-
-    public void addKySu() {
-        System.out.println("Nhập tên:");
-        String ten = scanner.nextLine();
-        System.out.println("Nhập Ngày sinh:");
-        String ngaySinh = scanner.nextLine();
-        System.out.println("Nhập giới tính:");
-        String gioiTinh = scanner.nextLine();
-        System.out.println("Nhập địa chỉ:");
-        String diaChi = scanner.nextLine();
-        System.out.println("Nhập Ngành:");
-        String nganh = scanner.nextLine();
-
-        KySu kySu = new KySu(ten, ngaySinh, gioiTinh, diaChi, nganh);
-        list.add(kySu);
-    }
-
     public void fillByName(String name) {
         for (CanBo c : list) {
             if (c.getHoTen().equals(name)) {
@@ -63,7 +46,6 @@ public class ManageCanBo {
             }
         }
     }
-
     public void removeByName(String name) {
         for (CanBo c : list) {
             if (c.getHoTen().equals(name)) {
@@ -73,7 +55,7 @@ public class ManageCanBo {
         }
     }
 
-    public void editByName(CanBo canBo, int index) {
+    public void edit(CanBo canBo, int index) {
         list.set(index, canBo);
     }
 
@@ -100,20 +82,5 @@ public class ManageCanBo {
                 };
             }
         }
-    }
-
-
-    public CanBo create() {
-        System.out.println("Nhập tên:");
-        String ten = scanner.nextLine();
-        System.out.println("Nhập Ngày sinh:");
-        String ngaySinh = scanner.nextLine();
-        System.out.println("Nhập giới tính:");
-        String gioiTinh = scanner.nextLine();
-        System.out.println("Nhập địa chỉ:");
-        String diaChi = scanner.nextLine();
-
-        return new CanBo(ten, ngaySinh, gioiTinh, diaChi);
-
     }
 }
